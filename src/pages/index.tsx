@@ -1,4 +1,4 @@
-import type { GetStaticPaths, GetStaticProps } from 'next'
+import type { GetServerSideProps, GetStaticPaths, GetStaticProps } from 'next'
 import Head from 'next/head'
 import { useState } from 'react'
 import { Card, CardCol, CardRow, CardSpan, CardSubtitle, CardTitle } from '../components/card'
@@ -68,7 +68,7 @@ const Home = ({ data }: HomeProps) => {
 
 export default Home
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const response = await fetch(`https://pokeapi.co/api/v2/pokemon/1`)
   const data = await response.json()
   return {
@@ -78,9 +78,3 @@ export const getStaticProps: GetStaticProps = async () => {
   }
 }
 
-export const getStaticPaths: GetStaticPaths = () => {
-  return {
-    paths: [],
-    fallback: false
-  }
-}
