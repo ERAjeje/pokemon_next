@@ -1,18 +1,18 @@
-import type { GetServerSideProps } from 'next'
+import type { GetStaticPaths, GetStaticProps } from 'next'
 import Head from 'next/head'
 import { useState } from 'react'
-import { Card, CardCol, CardRow, CardSpan, CardSubtitle, CardTitle } from '../src/components/card'
-import { Image } from '../src/components/image'
-import Lista from '../src/list'
-import { Pokemon } from '../src/models/pokemon'
-import styles from '../styles/Home.module.css'
+import { Card, CardCol, CardRow, CardSpan, CardSubtitle, CardTitle } from '../components/card'
+import { Image } from '../components/image'
+import Lista from '../list'
+import { PokemonModel } from '../models/pokemon_model'
+import styles from '../../styles/Home.module.css'
 
 type HomeProps = {
-  data: Pokemon
+  data: PokemonModel
 }
 
 const Home = ({ data }: HomeProps) => {
-  const [pokemon, setPokemon] = useState<Pokemon>(data)
+  const [pokemon, setPokemon] = useState<PokemonModel>(data)
   const selectPokemon = (event: { target: { value: React.SetStateAction<string>; }; }) => {
     fetch(`https://pokeapi.co/api/v2/pokemon/${event.target.value}`)
     .then(response => response.json())
@@ -68,12 +68,19 @@ const Home = ({ data }: HomeProps) => {
 
 export default Home
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const response = await fetch(`https://pokeapi.co/api/v2/pokemon/1`)
   const data = await response.json()
   return {
     props: {
       data
     }
+  }
+}
+
+export const getStaticPaths: GetStaticPaths = () => {
+  return {
+    paths: [],
+    fallback: false
   }
 }
