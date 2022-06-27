@@ -1,11 +1,11 @@
-import type { GetServerSideProps, GetStaticPaths, GetStaticProps } from 'next'
+import type { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import { useState } from 'react'
-import { Card, CardCol, CardRow, CardSpan, CardSubtitle, CardTitle } from '../components/card'
-import { Image } from '../components/image'
-import Lista from '../list'
-import { PokemonModel } from '../models/pokemon_model'
-import styles from '../../styles/Home.module.css'
+import { Card, CardCol, CardRow, CardSpan, CardSubtitle, CardTitle } from '../src/components/card'
+import { Image } from '../src/components/image'
+import Lista from '../src/list'
+import { PokemonModel } from '../src/models/pokemon_model'
+import styles from '../styles/Home.module.css'
 
 type HomeProps = {
   data: PokemonModel
